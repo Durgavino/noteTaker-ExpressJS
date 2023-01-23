@@ -17,41 +17,51 @@ app.use(express.static('public'));
 
 
 
-app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname,'notes.html/'));
-});
+app.get('/notes', (req, res) => 
+  res.sendFile(path.join(__dirname,'notes.html/'))
+);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname,'index.html'));
 });
 
-app.get('/api/notes', (req, res) => {
+app.get('/api/notes', (req, res) => 
   res.json(db)
-});
 
-app.post('/notes',(req,res)=>{
-  // response={
-  //   title:req.body.title,
-  //   text:req.body.text
-  // }
-  // console.log(response);
-  // res.end(Json.stringify(response));
-  //res.json(db)
+);
 
-  // res.json(`${req.method} request recieved`);
-  fs.readFile('./db/db.json','utf-8',(err,jsonString) =>{
-    if(err){
-      console.log(err);
-    }
-    else{
-      console.log(jsonString);
-    }
-   
-  })
-console.log(req.body);
+// app.post('/api/notes',(req,res)=>{
+
+
+//   // res.json(`${req.method} request recieved`);
+
+// // console.log(req.body);
  
-});
+// let newnote=req.body;
+// db.push(newnote);
+// fs.writeFile('./db/db.json',JSON.stringify(req.body,null,2),(err) =>{
+//   if(err){
+//     res.status(500).send('Error on Writing to the File')
+//   }
+//   else{
+//     //res.send('Data Written to File')
+//     res.send(req.body)
+//   }
+// })
+// });
 
+//   fs.readFile('./db/db.json',(err,data) =>{
+//     if(err){
+
+//       console.log(err);
+//     }
+//     else{
+//       let jsondata=JSON.parse(data)
+//       res.json(jsondata)
+//       console.log(jsonString);
+//     }
+   
+//   })
 
 
 app.listen(PORT, () =>
