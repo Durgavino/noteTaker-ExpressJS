@@ -4,8 +4,7 @@ const fs=require('fs');
 const app = express();
 const bodyParser=require('body-parser');
 const db=require('./db/db.json');
-// const { title } = require('process');
-// const { text } = require('body-parser');
+
 const PORT = 3000;
 
 app.use(bodyParser.json());
@@ -30,7 +29,7 @@ app.get('/api/notes', (req, res) => {
   res.json(db)
 });
 
-app.post('/api/notes',(req,res)=>{
+app.post('/notes',(req,res)=>{
   // response={
   //   title:req.body.title,
   //   text:req.body.text
@@ -39,7 +38,17 @@ app.post('/api/notes',(req,res)=>{
   // res.end(Json.stringify(response));
   //res.json(db)
 
-  res.json(`${req.method} request recieved`);
+  // res.json(`${req.method} request recieved`);
+  fs.readFile('./db/db.json','utf-8',(err,jsonString) =>{
+    if(err){
+      console.log(err);
+    }
+    else{
+      console.log(jsonString);
+    }
+   
+  })
+console.log(req.body);
  
 });
 
@@ -49,6 +58,3 @@ app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
 );
 
-// app.listen(3000,function () {
-//     console.log('app running');
-// });
