@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 let db = require('./db/db.json');
 
 console.log(db);
+
 const PORT = 3000;
 
 app.use(bodyParser.json());
@@ -19,33 +20,24 @@ app.use(express.static('public'));
 
 
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname, './notes.html'))
+  res.sendFile(path.join(__dirname,'./notes.html'))
 );
 
-app.get('/notes', (req, res) =>
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,'./index.html'));
+});
+
+
+
+app.get('/api/notes', (req, res) =>
   fs.readFile('./db/db.json',(err,data)=>{
     if(err) throw err;
-    let note=JSON.parse(data);
-    console.log(data);
+        let notesTaker=JSON.parse(data);
+    console.log(notesTaker);
+    
   })
 );
 
-
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './index.html'));
-});
-
-app.get('/api/notes', (req, res) => 
-  fs.readFile(path.join(__dirname,'./db/db.json',(err,data)=>{
-
-    if(err){
-      console.log(err);
-    }
-    return res.json(JSON.parse(data))
-  }))
-
-);
 
 
 
@@ -54,7 +46,7 @@ app.get('/api/notes', (req, res) =>
 app.post('/api/notes', (req, res) => {
 
 
-  
+
 });
 
 

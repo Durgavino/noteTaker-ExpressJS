@@ -1,23 +1,14 @@
 {
-  "name": "notetaker-expressjs",
+  "name": "note-taker",
   "version": "1.0.0",
-  "description": "## Your Task",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Durgavino/noteTaker-ExpressJS.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Durgavino/noteTaker-ExpressJS/issues"
-  },
-  "homepage": "https://github.com/Durgavino/noteTaker-ExpressJS#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.16.4"
   }
 }
