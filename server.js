@@ -20,34 +20,37 @@ app.use(express.static('public'));
 
 
 app.get('/notes', (req, res) =>
-  res.sendFile(path.join(__dirname,'./notes.html'))
+  res.sendFile(path.join(__dirname, './notes.html'))
 );
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname,'./index.html'));
-});
 
 
 
 app.get('/api/notes', (req, res) =>
-  fs.readFile('./db/db.json',(err,data)=>{
-    if(err) throw err;
-        let notesTaker=JSON.parse(data);
-    console.log(notesTaker);
-    
+ {
+  fs.readFile('./db/db.json', (err, data) => 
+  {
+    if (err) throw err;
+    db = JSON.parse(data);
+    //console.log(db);
   })
-);
-
-
-
-
+  res.json(db)
+});
 
 
 app.post('/api/notes', (req, res) => {
-
-
+const note=req.body;
+console.log(note);
+res.json({message:'note created successfully'});
 
 });
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './index.html'));
+});
+
+
 
 
 
