@@ -18,19 +18,25 @@ app.use(express.static('public'));
 
 
 app.get('/notes', (req, res) => 
-  res.sendFile(path.join(__dirname,'notes.html/'))
+  res.sendFile(path.join(__dirname,'./notes.html'))
 );
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname,'index.html'));
+  res.sendFile(path.join(__dirname,'./index.html'));
 });
 
 app.get('/api/notes', (req, res) => 
-  res.json(db)
+  fs.readFile(path.join(__dirname,'./db/db.json',(err,data)=>{
+
+    if(err){
+      console.log(err);
+    }
+    return res.json(JSON.parse(data))
+  }))
 
 );
 
-// app.post('/api/notes',(req,res)=>{
+ app.post('/api/notes',(req,res)=>{
 
 
 //   // res.json(`${req.method} request recieved`);
@@ -48,20 +54,20 @@ app.get('/api/notes', (req, res) =>
 //     res.send(req.body)
 //   }
 // })
-// });
+ });
 
-//   fs.readFile('./db/db.json',(err,data) =>{
-//     if(err){
+  // fs.readFile('./db/db.json',(err,data) =>{
+  //   if(err){
 
-//       console.log(err);
-//     }
-//     else{
-//       let jsondata=JSON.parse(data)
-//       res.json(jsondata)
-//       console.log(jsonString);
-//     }
+  //     console.log(err);
+  //   }
+  //   else{
+  //     let jsondata=JSON.parse(data)
+  //     res.json(jsondata)
+  //     console.log(jsonString);
+  //   }
    
-//   })
+  // })
 
 
 app.listen(PORT, () =>
