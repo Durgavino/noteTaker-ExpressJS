@@ -19,6 +19,5 @@ npm i express
 ## License
 MIT License
 
-## Deployed URL
-
 ## Deployed URL on Heroku
+https://calm-anchorage-71938.herokuapp.com/
