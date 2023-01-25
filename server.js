@@ -26,34 +26,43 @@ app.get('/notes', (req, res) =>
 
 
 
-app.get('/api/notes', (req, res) =>
- {
-  fs.readFile('./db/db.json', (err, data) => 
-  {
+app.get('/api/notes', (req, res) => {
+  fs.readFile('./db/db.json', (err, data) => {
     if (err) throw err;
     db = JSON.parse(data);
     //console.log(db);
   })
-  res.json(db)
+  res.json(db);
 });
+
 
 
 app.post('/api/notes', (req, res) => {
-const note=req.body;
-console.log(note);
-res.json({message:'note created successfully'});
+  fs.readFile(path.join(__dirname, './db/db.json'), (err, data) => {
+    if (err) {
+      res.status(500).send('Error on reading the file')
+    }
+console.log(data);
+    let notesTake = JSON.parse(data);
+    notesTake.push(req.body);
+    res.send('Data written successfully')
+    res.json(fs.writeFile('./db/db.json', JSON.stringify(notesTake), (err) => 
+    {
+      if (err) {
+        res.status(500).send('Error on writing the file')
+      }
+      // else {
+      //   //res.send('Data written successfully')
+      // }
+    }))
+
+  })
 
 });
-
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'));
 });
-
-
-
-
-
 
 app.listen(PORT, () =>
   console.log(`Example app listening at http://localhost:${PORT}`)
